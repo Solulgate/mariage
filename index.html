@@ -2,45 +2,149 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Organisation Mariage – Réservation des Tâches</title>
+  <title>On se marie ! Olivier & Emilie – Organisation & Tâches</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --accent: #a1c496;
+      --accent2: #eed475;
+      --wood: #7a5c37;
+      --cream: #f8f7f1;
+      --pink: #fbe7e4;
+      --guirlande: #ffe066;
+      --guirlande2: #f7887b;
+      --guirlande3: #fff4e6;
+    }
     body {
-      background: #f7f6f1;
+      background: var(--cream);
       font-family: 'Segoe UI', 'Arial', sans-serif;
       margin: 0;
-      padding: 0;
       color: #333;
     }
-    header {
-      background: #ae8f6f;
-      color: white;
-      padding: 2rem 1rem 1.2rem 1rem;
+    .bandeau {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      color: var(--wood);
       text-align: center;
-      border-radius: 0 0 30px 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 2.3rem 1rem 1.6rem 1rem;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 4px 14px #0001;
+      position: relative;
     }
-    h1 {
+    .bandeau h1 {
+      font-family: 'Dancing Script', 'Segoe Script', cursive, sans-serif;
+      font-size: 2.5em;
+      margin: 0 0 0.3em 0;
+      letter-spacing: 0.03em;
+    }
+    .guirlande {
+      width: 100%;
+      position: absolute;
+      top: 0.5em;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .guirlande span {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 60% 45% 45% 60%;
+      margin: 0 7px;
+      background: var(--guirlande);
+      box-shadow: 0 3px 9px #0001;
+      opacity: 0.92;
+    }
+    .guirlande span:nth-child(2) {background: var(--guirlande2);}
+    .guirlande span:nth-child(3) {background: var(--guirlande3);}
+    .guirlande span:nth-child(4) {background: var(--accent);}
+    .guirlande span:nth-child(5) {background: var(--guirlande2);}
+    .guirlande span:nth-child(6) {background: var(--guirlande3);}
+    .guirlande span:nth-child(7) {background: var(--accent2);}
+    .guirlande span:nth-child(8) {background: var(--guirlande);}
+    .guirlande span:nth-child(9) {background: var(--guirlande2);}
+    .infos-mariage {
+      max-width: 680px;
+      margin: 2.5em auto 1.5em auto;
+      background: #fffdf8f7;
+      border-radius: 22px;
+      padding: 1.6em 1.1em 2.2em 1.1em;
+      box-shadow: 0 2px 10px #d9c88a22;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.3em;
+      align-items: center;
+      border: 2.5px dashed #c7be9b;
+    }
+    .lieu-texte {
+      flex: 1 1 220px;
+      min-width: 200px;
+    }
+    .lieu-texte h2 {
+      font-family: 'Dancing Script', 'Segoe Script', cursive, sans-serif;
+      color: var(--wood);
+      font-size: 1.5em;
       margin: 0 0 0.2em 0;
-      font-size: 2.1em;
-      letter-spacing: 0.04em;
     }
-    h2 {
-      font-size: 1.2em;
-      color: #7e674e;
-      margin-top: 0.7em;
+    .lieu-texte .details {
+      font-size: 1.13em;
+      margin: 0.7em 0 0.3em 0;
+      color: #685031;
+    }
+    .date-mariage {
+      display: inline-block;
+      background: var(--accent2);
+      color: var(--wood);
+      font-size: 1.1em;
+      border-radius: 11px;
+      padding: 0.4em 1em;
+      margin-top: 0.8em;
+      box-shadow: 0 2px 7px #0001;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .map-box {
+      flex: 1 1 240px;
+      min-width: 200px;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .map-box img {
+      width: 100%;
+      border-radius: 18px;
+      border: 2px solid #c2b688;
+      box-shadow: 0 1px 9px #0001;
+      margin-bottom: 0.4em;
+    }
+    .map-lieux {
+      font-size: 0.95em;
+      color: #725920;
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+      text-align: left;
+      width: 100%;
     }
     main {
-      max-width: 680px;
-      margin: 2em auto;
+      max-width: 700px;
+      margin: 1.3em auto 2em auto;
       padding: 0 1em 2em 1em;
+    }
+    .form-section {
+      margin-top: 2.2em;
+      background: #fffefbe0;
+      border-radius: 16px;
+      box-shadow: 0 1px 8px #e7e6b433;
+      border: 1.6px solid #d8c6a7;
+      padding: 1.6em 1em 1em 1em;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1em;
       background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 8px #0001;
       border-radius: 16px;
       overflow: hidden;
     }
@@ -49,12 +153,12 @@
       text-align: left;
     }
     th {
-      background: #f0e6dc;
+      background: #f6ecd3;
       font-weight: 600;
       color: #6a5842;
     }
     tr:nth-child(even) {
-      background: #f8f6f2;
+      background: #fbf9f1;
     }
     .reserve-btn, .reserved {
       border: none;
@@ -62,18 +166,20 @@
       padding: 0.3em 0.8em;
       font-size: 1em;
       cursor: pointer;
-      background: #ae8f6f;
-      color: white;
+      background: var(--accent);
+      color: #fff;
       transition: background 0.2s;
       margin-right: 0.2em;
+      font-family: inherit;
     }
     .reserve-btn:hover {
-      background: #8a6d53;
+      background: #89a56a;
     }
     .reserved {
-      background: #a5c89a;
-      color: #28541a;
+      background: #eed475;
+      color: #7d6e30;
       cursor: not-allowed;
+      font-weight: bold;
     }
     .input-name {
       width: 90px;
@@ -81,11 +187,13 @@
       border-radius: 6px;
       border: 1px solid #c9b18a;
       margin-right: 0.2em;
+      font-family: inherit;
+      font-size: 1em;
     }
     .refresh-btn {
       float: right;
-      background: #e7b6ac;
-      color: #7a3021;
+      background: #fbe7e4;
+      color: #9d3c2e;
       padding: 0.5em 1.1em;
       border: none;
       border-radius: 8px;
@@ -93,53 +201,103 @@
       font-size: 0.95em;
       cursor: pointer;
       box-shadow: 0 1px 5px #0001;
+      font-family: inherit;
     }
     .refresh-btn:hover {
-      background: #f6d1c8;
+      background: #fbead3;
+    }
+    @media (max-width: 900px) {
+      .infos-mariage {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.1em 0.5em 1.4em 0.5em;
+      }
+      .map-box img {max-width: 100%;}
     }
     @media (max-width: 600px) {
-      main { padding: 0 0.2em;}
+      main, .infos-mariage { padding: 0 0.2em;}
       table, thead, tbody, th, td, tr { display: block; }
       th, td { padding: 0.7em 0.2em; }
       tr { border-bottom: 1px solid #e6dac6;}
       td { border: none;}
       th { border: none;}
       .refresh-btn { float: none; width: 100%; margin-bottom: 1em;}
+      .form-section {padding: 0.7em 0.2em 1em 0.2em;}
     }
+    /* Police manuscrite si dispo */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
   </style>
 </head>
 <body>
-  <header>
-    <h1>Organisation des tâches – Mariage 12-14 juillet</h1>
-    <h2>Gîte de la Grande Roussière, Chaillé-les-Marais</h2>
-    <p>Merci à tous pour votre aide ! Choisissez une ou plusieurs tâches ci-dessous pour participer à la préparation.</p>
-  </header>
+  <div class="bandeau">
+    <div class="guirlande" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1>On se marie !<br>Olivier & Emilie</h1>
+    <div style="font-size:1.1em; letter-spacing:0.04em; color:#704d2c; font-weight:500;">
+      Cérémonie, partage et fête champêtre
+    </div>
+  </div>
+  <div class="infos-mariage">
+    <div class="lieu-texte">
+      <h2>Le mariage</h2>
+      <div class="details">
+        <b>Lieu :</b> <br>
+        <span style="color:#286229;">Mairie de L'Orbrie</span><br>
+        <span style="font-size:0.97em; color:#866b3b;">2 Rue de la Mairie, 85200 L'Orbrie</span><br><br>
+        <b>Après-midi & soirée :</b> <br>
+        <span style="color:#286229;">Chez Marie et Philippe</span><br>
+        <span style="font-size:0.97em; color:#866b3b;">3 rue Puy Chabot, 85200 L'Orbrie</span>
+      </div>
+      <div class="date-mariage">
+        <span>Samedi 13 juillet 2024 – 11h</span>
+      </div>
+    </div>
+    <div class="map-box">
+      <img src="https://api.mapbox.com/styles/v1/mapbox/light-v11/static/pin-s-heart+cc0000(0.8077,-0.6811),pin-s-star+f4b400(0.8053,-0.6836)/0.8065,-0.6823,15/400x250?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNraXF6b3lhcTBodGMycXA4Z3dpZmptb3gifQ.6RDoZBptdFs14Kmz1k7_Tw"
+           alt="Carte des lieux - L'Orbrie"
+           style="max-width:350px;min-width:140px;border:2px solid #bdb083;">
+      <div class="map-lieux">
+        <span style="color:#c23d3d;">❤️</span> Mairie de L'Orbrie<br>
+        <span style="color:#e7b617;">★</span> Chez Marie & Philippe
+      </div>
+    </div>
+  </div>
   <main>
-    <button class="refresh-btn" onclick="fetchTasks()">🔄 Rafraîchir la liste</button>
-    <table>
-      <thead>
-        <tr>
-          <th>Tâche</th>
-          <th>Jour & Heure</th>
-          <th>Bénévole</th>
-        </tr>
-      </thead>
-      <tbody id="tasks-table">
-        <!-- Les tâches seront affichées ici -->
-      </tbody>
-    </table>
+    <section class="form-section">
+      <h2 style="font-family:'Dancing Script',cursive;font-size:1.6em;color:var(--wood);margin-top:0.1em;margin-bottom:0.4em;">
+        Tâches de préparation et d'organisation
+      </h2>
+      <p style="color:#72603a;font-size:1.12em;margin-bottom:0.8em;">
+        Merci à toutes et à tous pour votre aide précieuse.<br>
+        Indiquez votre prénom pour réserver une tâche (une fois prise, la tâche est bloquée).
+      </p>
+      <button class="refresh-btn" onclick="fetchTasks()">🔄 Rafraîchir la liste</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Tâche</th>
+            <th>Jour & Heure</th>
+            <th>Bénévole</th>
+          </tr>
+        </thead>
+        <tbody id="tasks-table">
+          <!-- Les tâches seront affichées ici -->
+        </tbody>
+      </table>
+    </section>
   </main>
   <script>
+    // Remplace cette URL par la tienne si besoin !
     const API_URL = "https://script.google.com/macros/s/AKfycbx-5aLYfDlSD4ptAH2nypQd4URdOC-2DVgxFXJ4cMPB5vTa3sDrWP6g0pfMPb3SVmBj/exec";
     let tasks = [];
     let volunteers = [];
 
-    // Récupérer la liste depuis Google Sheet
     function fetchTasks() {
       fetch(API_URL)
         .then(r => r.json())
         .then(data => {
-          // On ignore l'entête (ligne 0)
           tasks = data.slice(1).map(row => ({
             label: row[0],
             when: row[1]
@@ -148,11 +306,10 @@
           renderTasks();
         })
         .catch(() => {
-          alert("Erreur de connexion à la feuille Google : vérifiez l’API ou réessayez plus tard.");
+          alert("Erreur de connexion à la feuille Google : vérifiez l’API ou réessayez plus tard.");
         });
     }
 
-    // Envoyer la réservation à Google Sheet
     function reserveTask(index, name) {
       fetch(API_URL, {
         method: 'POST',
@@ -161,7 +318,6 @@
       }).then(fetchTasks);
     }
 
-    // Affichage du tableau des tâches
     function renderTasks() {
       const tbody = document.getElementById('tasks-table');
       tbody.innerHTML = '';
@@ -202,7 +358,6 @@
       });
     }
 
-    // Lancement initial
     fetchTasks();
   </script>
 </body>
