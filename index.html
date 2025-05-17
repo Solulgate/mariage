@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>On se marie ! Olivier & Emilie – Organisation & Tâches</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts pour "Dancing Script" -->
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script:700&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent: #a1c496;
@@ -23,8 +25,8 @@
     }
     .bandeau-photo {
       width: 100%;
-      min-height: 220px;
-      max-height: 300px;
+      min-height: 200px;
+      max-height: 260px;
       object-fit: cover;
       display: block;
       box-shadow: 0 6px 28px #a1c49640;
@@ -44,19 +46,21 @@
       margin-bottom: 1.2em;
     }
     .bandeau h1 {
-      font-family: 'Dancing Script', 'Segoe Script', cursive, sans-serif;
-      font-size: 2.5em;
+      font-family: 'Dancing Script', cursive, 'Segoe Script', sans-serif;
+      font-size: 2.4em;
       margin: 0 0 0.3em 0;
       letter-spacing: 0.03em;
+      font-weight: 700;
     }
     .guirlande {
       width: 100%;
       position: absolute;
-      top: 0.5em;
+      top: 0.3em;
       left: 0;
       display: flex;
       justify-content: center;
       pointer-events: none;
+      z-index: 2;
     }
     .guirlande span {
       display: inline-block;
@@ -67,6 +71,7 @@
       background: var(--guirlande);
       box-shadow: 0 3px 9px #0001;
       opacity: 0.92;
+      transform: rotate(-16deg);
     }
     .guirlande span:nth-child(2) {background: var(--guirlande2);}
     .guirlande span:nth-child(3) {background: var(--guirlande3);}
@@ -77,7 +82,7 @@
     .guirlande span:nth-child(8) {background: var(--guirlande);}
     .guirlande span:nth-child(9) {background: var(--guirlande2);}
     .infos-mariage {
-      max-width: 680px;
+      max-width: 700px;
       margin: 2.5em auto 1.5em auto;
       background: #fffdf8f7;
       border-radius: 22px;
@@ -94,10 +99,11 @@
       min-width: 200px;
     }
     .lieu-texte h2 {
-      font-family: 'Dancing Script', 'Segoe Script', cursive, sans-serif;
+      font-family: 'Dancing Script', cursive, 'Segoe Script', sans-serif;
       color: var(--wood);
       font-size: 1.5em;
       margin: 0 0 0.2em 0;
+      font-weight: 700;
     }
     .lieu-texte .details {
       font-size: 1.13em;
@@ -108,10 +114,10 @@
       display: inline-block;
       background: var(--accent2);
       color: var(--wood);
-      font-size: 1.1em;
+      font-size: 1.08em;
       border-radius: 11px;
-      padding: 0.4em 1em;
-      margin-top: 0.8em;
+      padding: 0.35em 1em;
+      margin-top: 0.7em;
       box-shadow: 0 2px 7px #0001;
       font-weight: 600;
       letter-spacing: 0.05em;
@@ -133,9 +139,9 @@
       background: #e7e6d6;
     }
     .map-lieux {
-      font-size: 0.95em;
+      font-size: 0.98em;
       color: #725920;
-      margin-top: 0.2em;
+      margin-top: 0.15em;
       margin-bottom: 0.7em;
       text-align: left;
       width: 100%;
@@ -224,4 +230,205 @@
       .infos-mariage {
         flex-direction: column;
         align-items: stretch;
-        pa
+        padding: 1.3em 0.7em 1.2em 0.7em;
+      }
+      .map-box, .lieu-texte {
+        min-width: 0;
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      main { padding: 0 0.1em 1.5em 0.1em;}
+      .form-section {padding: 1em 0.3em 1em 0.3em;}
+      table, thead, tbody, th, td, tr { display: block; }
+      th, td { padding: 0.7em 0.2em; }
+      tr { border-bottom: 1px solid #e6dac6;}
+      td, th { border: none;}
+      .infos-mariage { padding: 0.7em;}
+      .bandeau-photo { min-height: 110px; max-height: 140px;}
+      .bandeau {padding: 1.3em 0.4em 1em 0.4em;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Bandeau photo en haut (change l'URL si tu veux ta propre image) -->
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Bandeau mariage guinguette" class="bandeau-photo">
+
+  <div class="bandeau">
+    <div class="guirlande">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1>On se marie !</h1>
+    <div style="font-size:1.18em; font-weight:500;">
+      Olivier & Emilie<br>
+      <span style="font-size:0.93em; color:#6a5842;">Organisation & Tâches</span>
+    </div>
+  </div>
+
+  <div class="infos-mariage">
+    <div class="lieu-texte">
+      <h2>Le lieu</h2>
+      <div class="details">
+        Gîte de la Grande Roussière<br>
+        Chaillé-les-Marais, Vendée
+      </div>
+      <div class="date-mariage">12 au 14 juillet 2025</div>
+    </div>
+    <div class="map-box">
+      <img src="https://maps.googleapis.com/maps/api/staticmap?center=Chaillé-les-Marais,France&zoom=13&size=300x150&maptype=roadmap
+        &markers=color:orange%7Clabel:M%7CChaillé-les-Marais,France&key=AIzaSyDUMs3wR6vOyyKAn5T4d1"
+        alt="Carte du lieu">
+      <div class="map-lieux">À 15 min de Luçon – Parking sur place</div>
+    </div>
+  </div>
+
+  <main>
+    <div class="form-section">
+      <button class="refresh-btn" onclick="resetAllTasks()">Tout réinitialiser</button>
+      <h2 style="font-family: 'Dancing Script', cursive; color: #7a5c37; font-size:1.5em; margin-top:0;">Inscrivez-vous pour aider :</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tâche</th>
+            <th>Jour & Heure</th>
+            <th>Bénévole</th>
+          </tr>
+        </thead>
+        <tbody id="tasks-table"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    // Liste des tâches
+    const tasks = [
+      {
+        label: "Aller chercher les fleurs (Beauséjour)",
+        when: "Vendredi 12 juillet, matin (9h-11h)"
+      },
+      {
+        label: "Aller chercher le camion frigorifique puis le repas et les pâtisseries chez le traiteur (Clisson)",
+        when: "Vendredi 12 juillet, matin (8h-11h)"
+      },
+      {
+        label: "Aller chercher la tireuse à bière et les fûts (Petit Tonneau, L'Orbrie)",
+        when: "Vendredi 12 juillet, matin (9h-11h)"
+      },
+      {
+        label: "Aller chercher le mobilier déco (Gîte La Minoterie, Rocheservière)",
+        when: "Jeudi 11 juillet, après-midi (14h-17h)"
+      },
+      {
+        label: "Préparer la salle et l'extérieur (tables, chaises, lumières, sono)",
+        when: "Vendredi 12 juillet, après-midi (13h-18h)"
+      },
+      {
+        label: "Aider à organiser la déco",
+        when: "Vendredi 12 juillet, après-midi (14h-18h)"
+      },
+      {
+        label: "Accueil des invités / gestion du parking",
+        when: "Samedi 13 juillet, matin (10h-12h)"
+      },
+      {
+        label: "Gestion du vestiaire et du livre d'or",
+        when: "Samedi 13 juillet, après-midi/soir (17h-20h)"
+      },
+      {
+        label: "Superviser la mise en place du vin d'honneur",
+        when: "Samedi 13 juillet, après-midi (16h-18h)"
+      },
+      {
+        label: "S'occuper de la musique (playlist, sono, gestion micros)",
+        when: "Samedi 13 juillet, après-midi/soir (18h-2h)"
+      },
+      {
+        label: "Gestion du buffet / boissons",
+        when: "Samedi 13 juillet, soir (19h-23h)"
+      },
+      {
+        label: "Aider à ranger",
+        when: "Dimanche 14 juillet, matin (9h-13h)"
+      },
+      {
+        label: "Ramener camion frigorifique et plats du traiteur",
+        when: "Dimanche 14 juillet, après-midi (14h-16h)"
+      },
+      {
+        label: "Ramener tireuse à bière",
+        when: "Dimanche 14 juillet, après-midi (14h-16h)"
+      },
+      {
+        label: "Ramener le matériel de déco",
+        when: "Dimanche 14 juillet, après-midi (14h-16h)"
+      }
+    ];
+
+    const STORAGE_KEY = "weddingTasksVolunteers";
+    let volunteers = [];
+
+    // Chargement de l'état sauvegardé
+    function loadVolunteers() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (data) {
+          volunteers = JSON.parse(data);
+          if (!Array.isArray(volunteers) || volunteers.length !== tasks.length) throw "Reset";
+        } else {
+          volunteers = Array(tasks.length).fill('');
+        }
+      } catch {
+        volunteers = Array(tasks.length).fill('');
+      }
+    }
+
+    // Sauvegarde de l'état
+    function saveVolunteers() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(volunteers));
+    }
+
+    // Reset (tout effacer)
+    function resetAllTasks() {
+      if (confirm("Tout réinitialiser ? Les réservations seront perdues pour tout le monde sur cet appareil.")) {
+        volunteers = Array(tasks.length).fill('');
+        saveVolunteers();
+        renderTasks();
+      }
+    }
+
+    // Affichage
+    function renderTasks() {
+      const tbody = document.getElementById('tasks-table');
+      tbody.innerHTML = '';
+      tasks.forEach((task, i) => {
+        const tr = document.createElement('tr');
+        // Tâche
+        const tdTask = document.createElement('td');
+        tdTask.textContent = task.label;
+        tr.appendChild(tdTask);
+        // Jour & heure
+        const tdWhen = document.createElement('td');
+        tdWhen.textContent = task.when;
+        tr.appendChild(tdWhen);
+        // Colonne bénévole ou bouton de réservation
+        const tdVolunteer = document.createElement('td');
+        if (volunteers[i]) {
+          tdVolunteer.innerHTML = `<span class="reserved">Réservée par ${volunteers[i]}</span>`;
+        } else {
+          tdVolunteer.innerHTML = `
+            <input class="input-name" type="text" placeholder="Votre prénom">
+            <button class="reserve-btn">Je m'engage !</button>
+          `;
+          setTimeout(() => {
+            const btn = tdVolunteer.querySelector('button');
+            btn.onclick = () => {
+              const input = tdVolunteer.querySelector('input');
+              const name = input.value.trim();
+              if (!name) {
+                input.style.borderColor = "red";
+                input.focus();
+                return;
+              }
+              volunteers[i] = name;
+              saveVol
