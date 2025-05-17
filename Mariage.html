@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Organisation Mariage – Réservation des Tâches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f7f6f1;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #ae8f6f;
+      color: white;
+      padding: 2rem 1rem 1.2rem 1rem;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    h1 {
+      margin: 0 0 0.2em 0;
+      font-size: 2.1em;
+      letter-spacing: 0.04em;
+    }
+    h2 {
+      font-size: 1.2em;
+      color: #7e674e;
+      margin-top: 0.7em;
+    }
+    main {
+      max-width: 680px;
+      margin: 2em auto;
+      padding: 0 1em 2em 1em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.7em 0.4em;
+      text-align: left;
+    }
+    th {
+      background: #f0e6dc;
+      font-weight: 600;
+      color: #6a5842;
+    }
+    tr:nth-child(even) {
+      background: #f8f6f2;
+    }
+    .reserve-btn, .reserved {
+      border: none;
+      border-radius: 8px;
+      padding: 0.3em 0.8em;
+      font-size: 1em;
+      cursor: pointer;
+      background: #ae8f6f;
+      color: white;
+      transition: background 0.2s;
+      margin-right: 0.2em;
+    }
+    .reserve-btn:hover {
+      background: #8a6d53;
+    }
+    .reserved {
+      background: #a5c89a;
+      color: #28541a;
+      cursor: not-allowed;
+    }
+    .input-name {
+      width: 90px;
+      padding: 0.2em;
+      border-radius: 6px;
+      border: 1px solid #c9b18a;
+      margin-right: 0.2em;
+    }
+    .refresh-btn {
+      float: right;
+      background: #e7b6ac;
+      color: #7a3021;
+      padding: 0.5em 1.1em;
+      border: none;
+      border-radius: 8px;
+      margin-top: 1em;
+      font-size: 0.95em;
+      cursor: pointer;
+      box-shadow: 0 1px 5px #0001;
+    }
+    .refresh-btn:hover {
+      background: #f6d1c8;
+    }
+    @media (max-width: 600px) {
+      main { padding: 0 0.2em;}
+      table, thead, tbody, th, td, tr { display: block; }
+      th, td { padding: 0.7em 0.2em; }
+      tr { border-bottom: 1px solid #e6dac6;}
+      td { border: none;}
+      th { border: none;}
+      .refresh-btn { float: none; width: 100%; margin-bottom: 1em;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Organisation des tâches – Mariage 12-14 juillet</h1>
+    <h2>Gîte de la Grande Roussière, Chaillé-les-Marais</h2>
+    <p>Merci à tous pour votre aide ! Choisissez une ou plusieurs tâches ci-dessous pour participer à la préparation.</p>
+  </header>
+  <main>
+    <button class="refresh-btn" onclick="fetchTasks()">🔄 Rafraîchir la liste</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Tâche</th>
+          <th>Jour & Heure</th>
+          <th>Bénévole</th>
+        </tr>
+      </thead>
+      <tbody id="tasks-table">
+        <!-- Les tâches seront affichées ici -->
+      </tbody>
+    </table>
+  </main>
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbx-5aLYfDlSD4ptAH2nypQd4URdOC-2DVgxFXJ4cMPB5vTa3sDrWP6g0pfMPb3SVmBj/exec";
+    let tasks = [];
+    let volunteers = [];
+
+    // Récupérer la liste depuis Google Sheet
+    function fetchTasks() {
+      fetch(API_URL)
+        .then(r => r.json())
+        .then(data => {
+          // On ignore l'entête (ligne 0)
+          tasks = data.slice(1).map(row => ({
+            label: row[0],
+            when: row[1]
+          }));
+          volunteers = data.slice(1).map(row => row[2] || '');
+          renderTasks();
+        })
+        .catch(() => {
+          alert("Erreur de connexion à la feuille Google : vérifiez l’API ou réessayez plus tard.");
+        });
+    }
+
+    // Envoyer la réservation à Google Sheet
+    function reserveTask(index, name) {
+      fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({index, benevole: name}),
+        headers: {'Content-Type': 'application/json'}
+      }).then(fetchTasks);
+    }
+
+    // Affichage du tableau des tâches
+    function renderTasks() {
+      const tbody = document.getElementById('tasks-table');
+      tbody.innerHTML = '';
+      tasks.forEach((task, i) => {
+        const tr = document.createElement('tr');
+        const tdTask = document.createElement('td');
+        tdTask.textContent = task.label;
+        tr.appendChild(tdTask);
+
+        const tdWhen = document.createElement('td');
+        tdWhen.textContent = task.when;
+        tr.appendChild(tdWhen);
+
+        const tdVolunteer = document.createElement('td');
+        if (volunteers[i]) {
+          tdVolunteer.innerHTML = `<span class="reserved">Réservée par ${volunteers[i]}</span>`;
+        } else {
+          tdVolunteer.innerHTML = `
+            <input class="input-name" type="text" placeholder="Votre prénom">
+            <button class="reserve-btn">Je m'engage !</button>
+          `;
+          setTimeout(() => {
+            const btn = tdVolunteer.querySelector('button');
+            btn.onclick = () => {
+              const input = tdVolunteer.querySelector('input');
+              const name = input.value.trim();
+              if (!name) {
+                input.style.borderColor = "red";
+                input.focus();
+                return;
+              }
+              reserveTask(i, name);
+            };
+          }, 1);
+        }
+        tr.appendChild(tdVolunteer);
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Lancement initial
+    fetchTasks();
+  </script>
+</body>
+</html>
